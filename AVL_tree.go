@@ -102,6 +102,26 @@ func (t *AVLTree) InorderTraverse(node *TreeNode, res *[]int) {
 	t.InorderTraverse(node.right, res)
 }
 
+func (t *AVLTree) search(node *TreeNode, val int) bool {
+	if node == nil {
+		return false
+	}
+	if node.val == val {
+		return true
+	}
+	for node != nil {
+		if node.val == val {
+			return true
+		}
+		if val < node.val {
+			node = node.left
+		} else {
+			node = node.right
+		}
+	}
+	return false
+}
+
 func max(a, b int) int {
 	if a > b {
 		return a
@@ -131,6 +151,10 @@ func TestAVLBySortingRandomNumbers() {
 	fmt.Println("test passed")
 }
 
+func (t *AVLTree) Search(val int) bool {
+	return t.search(t.root, val)
+}
+
 func CheckAVLForBalance() {
 	tree := NewAVLTree()
 	tree.Insert(10)
@@ -151,4 +175,3 @@ func main() {
 	TestAVLBySortingRandomNumbers()
 	CheckAVLForBalance()
 }
-
